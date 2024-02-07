@@ -1,0 +1,26 @@
+<style>
+    .fixed-width-column{
+        display: none;
+    }
+</style>
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %} 
+    <div style="padding-top: 25px;" class="content-section">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend style="font-size: 1.8rem;" class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}
+                <div class="form-group">
+                    <button class="btn btn-dark" type="submit">Sign Up</button>
+                </div>
+                <div class="border-top pt-2 mt-3">
+                    <small class="text-muted">
+                        Already Have An Account? <a style="text-decoration: none;" class="ml-2" href="{% url 'login' %}">Sign In</a>
+                    </small>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}

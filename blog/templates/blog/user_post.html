@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h1 class="mb-3">Posts By <strong> @{{ view.kwargs.username }}</strong></h1>
+    {% for post in posts %}
+        <div class="container media content-section mb-2">
+            <div class="row g-0">
+                <div class="col-md-auto"><img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"></div>
+                <div class="col ">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <a style="text-decoration: none;" class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                            <small style="float: right;" class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                        </div>
+                        <h2 style="margin-top:8px; font-size: 1.8rem;"><a style="text-decoration: none;" class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                        <p class="article-content">{{ post.content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <style>
+        @media (max-width: 780px) {
+            .col-md-auto {
+                flex: 0 0 20%; /* Change 25% to your desired width */
+                max-width: 20%;
+            }
+            .col {
+                flex: 0 0 75%; /* Change 75% to your desired width */
+                max-width: 75%;
+            }
+        }
+    </style>
+{% endblock content %}
